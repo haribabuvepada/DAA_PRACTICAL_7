@@ -1,0 +1,51 @@
+# Graph implementation using DFS and BFS
+
+from collections import deque
+
+# Graph using adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+
+# DFS - Depth First Search
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+
+    visited.add(start)
+    print(start, end=" ")
+
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+
+
+# BFS - Breadth First Search
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+
+    visited.add(start)
+
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+
+# Main program
+print("DFS Traversal:")
+dfs(graph, 'A')
+
+print("\n\nBFS Traversal:")
+bfs(graph, 'A')
